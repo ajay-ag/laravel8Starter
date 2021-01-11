@@ -1,0 +1,500 @@
+// Global settings
+$enable-caret:              true;
+$enable-rounded:            true;
+$enable-shadows:            true;
+$enable-gradients:          false;
+$enable-transitions:        true;
+$enable-grid-classes:       true;
+$enable-print-styles:       true;
+
+// Color scheme
+$primary:       #242e4c;
+$secondary:     #1c2540;
+$tertiary:      #1D58A5;
+
+// Generic colors
+$blue:    #0056B3;
+$indigo:  #6610f2;
+$purple:  #6f42c1;
+$pink:    #e83e8c;
+$red:     #A91E2C;
+$orange:  #fd7e14;
+$yellow:  #F0B400;
+$green:   #18634B;
+$teal:    #0056B3;
+$cyan:    #17a2b8;
+
+// Shades of grey
+$white:    #ffffff;
+$gray-100: #ffffff;
+$gray-200: #fafbfe;
+$gray-300: #FAFAFB;
+$gray-400: #e6e7e8;
+$gray-500: #B7C3D2;
+$gray-600: #93a5be;
+$gray-700: #52547a;
+$gray-800: #1f2483;
+$gray-900: #424767;
+$dark    : #1a1e50;
+$black   : #111111;
+
+
+$grays: ();
+$grays: map-merge((
+  "100": $gray-100,
+  "200": $gray-200,
+  "300": $gray-300,
+  "400": $gray-400,
+  "500": $gray-500,
+  "600": $gray-600,
+  "700": $gray-700,
+  "800": $gray-800,
+  "900": $gray-900
+), $grays);
+
+// Main color variables
+$success:       $green;
+$info:          $blue;
+$warning:       $yellow;
+$danger:        $red;
+$gray:          $gray-900;
+$light:         $gray-400;
+$lighten:       $gray-100;
+$soft:          $gray-300;
+$dark:          $dark;
+
+// Brands colors
+$facebook:      #3b5999;
+$twitter:       #1da1f2;
+$google:        #DB4337;
+$github:        #24292E;
+$pinterest:     #bd081c;
+
+// Theme colors
+$theme-colors: ();
+$theme-colors: map-merge((
+  "primary":      $primary,
+  "secondary":    $secondary,
+  "tertiary":     $tertiary,
+  "light":        $light,
+  "lighten":      $lighten,
+  "success":      $success,
+  "info":         $info,
+  "warning":      $warning,
+  "danger":       $danger,
+  "facebook":     $facebook,
+  "twitter":      $twitter,
+  "google":       $google,
+  "github":       $github,
+  "white":        $white,
+  "gray":         $gray,
+  "neutral":      $white,
+  "dark":         $dark,
+  "soft":         $soft,
+  "black":        $black,
+  "purple":       $purple,
+  "gray-100":     $gray-100,
+  "gray-200":     $gray-200,
+  "gray-300":     $gray-300,
+  "gray-400":     $gray-400,
+  "gray-500":     $gray-500,
+  "gray-600":     $gray-600,
+  "gray-700":     $gray-700,
+  "gray-800":     $gray-800,
+), $theme-colors);
+
+// Brand colors
+$brand-colors: ();
+$brand-colors: map-merge((
+  "facebook":     $facebook,
+  "twitter":      $twitter,
+  "google":       $google,
+  "github":       $github,
+  "pinterest":    $pinterest,
+), $brand-colors);
+
+$yiq-text-dark:             $secondary !default;
+
+// Body
+$body-bg: $white;
+$body-color: $gray-900;
+
+// Shadows
+$box-shadow-sm:               0 .125rem .25rem rgba($black, .075) !default;
+$box-shadow:                  0 .5rem 1rem rgba($black, .15) !default;
+$box-shadow-lg:               0 1rem 3rem rgba($black, .175) !default;
+
+// Sections
+$section-colors: ();
+$section-colors: map-merge((
+  "primary":      $primary,
+  "secondary":    $secondary,
+  "gray":         $gray-400,
+  "white":        $white,
+  "dark":         $dark,
+  "black":        $black
+), $section-colors);
+
+// Links
+$link-color:                $primary;
+$link-decoration:           none;
+$link-hover-color:          darken($link-color, 10%);
+$link-hover-decoration:     none;
+
+// Spacing
+$spacer: 1rem;
+
+$spacers: ();
+$spacers: map-merge(
+  (
+    6: ($spacer * 5),
+    7: ($spacer * 8),
+    8: ($spacer * 10),
+    9: ($spacer * 11),
+    10: ($spacer * 14),
+    11: ($spacer * 16),
+    12: ($spacer * 20),
+    'sm': ($spacer * 1),
+    'md': ($spacer * 2),
+    'lg': ($spacer * 4),
+    'xl': ($spacer * 8)
+), $spacers);
+
+
+// This variable affects the `.h-*` and `.w-*` classes.
+
+$sizes: ();
+$sizes: map-merge((
+  25: 25%,
+  50: 50%,
+  75: 75%,
+  100: 100%
+), $sizes);
+
+// Components
+
+$border-width:                .0625rem;
+$border-width-md:             0.125rem;
+$border-width-lg:             0.25rem;
+$border-width-xl:             0.375rem;
+$border-color-white:          $white;
+$border-color:                $light;
+
+$border-radius:               .45rem;
+$border-radius-xl:            1.275rem;
+$border-radius-lg:            .3rem;
+$border-radius-md:            .2rem;
+$border-radius-sm:            .1rem;
+$border-radius-pill:           2rem;
+$circle-radius:                50%;
+$organic-radius:               63% 37% 30% 70% / 50% 45% 55% 50%;
+
+$component-active-color:        $white;
+$component-active-bg:           theme-color("primary");
+$component-active-border-color: theme-color("primary");
+
+$component-hover-color:        $gray-300;
+$component-hover-bg:           $gray-300;
+$component-hover-border-color: $gray-300;
+
+$caret-width:                 .3em;
+
+$transition-base:             all .2s ease;
+$transition-transform:        transform .2s ease;
+$transition-fade:             opacity .15s linear;
+$transition-collapse:         height .35s ease;
+$transition-tabs:             all 0.2s;
+
+
+// Fonts
+$fontawesome-webfonts-path:   '../vendor/font-awesome/webfonts';
+$font-family-base:            'Nunito Sans', sans-serif;
+$font-family-headers:         'Nunito Sans', sans-serif;
+$font-awesome-5:              'Font Awesome 5 Free';
+$font-size-base:              1rem; // Assumes the browser default, typically `16px`
+$font-size-xxl:               ($font-size-base * 2);
+$font-size-xl:                ($font-size-base * 1.5);
+$font-size-lg:                ($font-size-base * 1.25);
+$font-size-md:                ($font-size-base * 1);
+$font-size-sm:                ($font-size-base * .875);
+$font-size-xs:                ($font-size-base * .75);
+
+$font-weight-light:           300;
+$font-weight-normal:          400;
+$font-weight-bold:            600;
+$font-weight-bolder:          700;
+
+$font-weight-base:            $font-weight-light;
+$shape-height-base:            1.5;
+
+$h1-font-size:                $font-size-base * 2.5;  //2.1875rem
+$h2-font-size:                $font-size-base * 2;
+$h3-font-size:                $font-size-base * 1.75;
+$h4-font-size:                $font-size-base * 1.5;
+$h5-font-size:                $font-size-base * 1.25;
+$h6-font-size:                $font-size-base;
+
+$headings-margin-bottom:      ($spacer / 2);
+$headings-font-family:        inherit;
+$headings-font-weight:        $font-weight-bold;
+$headings-line-height:        1.3;
+$headings-color:              $secondary;
+
+$heading-letter-spacing:      .025em;
+$heading-font-size:           .95rem;
+$heading-text-transform:      uppercase;
+$heading-font-weight:         $headings-font-weight;
+
+$heading-title-letter-spacing:      .025em;
+$heading-title-font-size:           1.375rem;
+$heading-title-font-weight:         $font-weight-bold;
+$heading-title-text-transform:      uppercase;
+
+$heading-section-letter-spacing:      .025em;
+$heading-section-font-size:           1.375rem;
+$heading-section-font-weight:         $font-weight-bold;
+$heading-section-text-transform:      uppercase;
+
+// Display headings
+$display1-size:               5rem;
+$display2-size:               3.5rem;
+$display3-size:               2.5rem;
+$display4-size:               1.875rem  ;
+
+$display-font-weight:         $font-weight-bold;
+$display1-weight:             $font-weight-bold;
+$display2-weight:             $font-weight-bold;
+$display3-weight:             $font-weight-bold;
+$display4-weight:             $font-weight-bold;
+$display-line-height:         $headings-line-height;
+
+$paragraph-font-size:         1rem;
+$paragraph-font-weight:       300;
+$paragraph-line-height:       1.6;
+
+$lead-font-size:              ($paragraph-font-size * 1.25);
+$lead-font-weight:            300;
+
+$small-font-size:             80%;
+
+$text-muted:                  $gray-800;
+
+$blockquote-small-color:      $gray-600;
+$blockquote-font-size:        ($font-size-base * 1.25);
+
+$hr-border-color:             rgba($black, .05);
+$hr-border-width:             $border-width;
+
+$mark-padding:                .2em;
+
+$dt-font-weight:              $font-weight-bold;
+
+$list-inline-padding:         .5rem;
+
+$mark-bg:                     #fcf8e3;
+
+$hr-margin-y:                 $spacer * 1.5;
+
+// Breadcrumbs
+$breadcrumb-active-color:        $white;
+$breadcrumb-divider-color:       $gray-700;
+$breadcrumb-item-color:          $gray-700;
+$breadcrumb-font-weight:         $font-weight-normal;
+$breadcrumb-active-font-weight:  $font-weight-normal;
+$breadcrumb-item-light-color:    $white;
+$breadcrumb-divider-light-color: $white;
+
+// Icon
+$icon-box-padding:      1rem;
+$icon-shape:            4.5rem;
+$icon-shape-sm:         3rem;
+$icon-shape-lg:         6rem;
+$icon-shape-img:        6rem;
+$icon-shape-bordered:   5rem;
+$icon-size:             2.5rem;
+$icon-size-xs:          1.25rem;
+$icon-size-sm:          1.5rem;
+$icon-size-xl:          3rem;
+
+//Bootstrap Carousel
+
+$carousel-control-opacity: 1;
+
+
+
+// Inputs
+
+$input-btn-padding-y:         .55rem;
+$input-btn-padding-x:         .75rem;
+$input-btn-line-height:       1.5;
+
+$input-btn-padding-y-sm:      .375rem;
+$input-btn-padding-x-sm:      .75rem;
+$input-btn-line-height-sm:    1.5;
+
+$input-btn-padding-y-lg:      .625rem;
+$input-btn-padding-x-lg:      .875rem;
+$input-btn-line-height-lg:    1.5;
+
+$input-font-size-sm:           .875rem;
+$input-font-size:          1rem;
+$input-font-size-lg:       1.25rem;
+
+// Buttons
+
+$btn-padding-y:               $input-btn-padding-y;
+$btn-padding-x:               $input-btn-padding-x + 0.2;
+$btn-line-height:             $input-btn-line-height;
+
+$btn-padding-y-sm:            $input-btn-padding-y-sm;
+$btn-padding-x-sm:            $input-btn-padding-x-sm;
+$btn-line-height-sm:          $input-btn-line-height-sm;
+
+$btn-padding-y-lg:            $input-btn-padding-y-lg;
+$btn-padding-x-lg:            $input-btn-padding-x-lg;
+$btn-line-height-lg:          $input-btn-line-height-lg;
+
+$btn-border-width:            $border-width;
+
+$btn-font-size:               $font-size-base;
+$btn-font-weight:             $font-weight-bold;
+$btn-text-transform:          uppercase;
+$btn-letter-spacing:          .025em;
+$btn-box-shadow:              $box-shadow-sm;
+$btn-hover-box-shadow:        $box-shadow-sm;
+$btn-focus-box-shadow:        $btn-hover-box-shadow;
+$btn-focus-width:             .25rem;
+
+$btn-active-box-shadow:       none;
+
+
+// Dropdown
+
+$dropdown-padding-y:                .7rem;
+$dropdown-padding-x:                .7rem;
+$dropdown-font-size:                $font-size-sm;
+$dropdown-bg:                       $white;
+$dropdown-border-width:             0;
+$dropdown-border-color:             rgba($black, .15);
+$dropdown-border-radius:            $border-radius;
+$dropdown-box-shadow:               $box-shadow-lg;
+$dropdown-item-color:               $gray-800;
+$dropdown-item-font-weight:         $font-weight-light;
+$dropdown-item-hover-color:         $gray-900;
+$dropdown-header-color:             $gray-900;
+$dropdown-header-font-weight:       $font-weight-bold;
+
+$dropdown-link-active-color:        $white;
+$dropdown-link-active-bg:           $gray-400;
+
+// Navs
+$nav-link-color:                    $gray-800;
+$nav-link-hover-color:              $secondary;
+$nav-link-active-color:             $gray-800;
+$nav-link-shadow:                   none;
+$nav-pills-bg:                      $white;
+$nav-pills-border-color:            $light;
+$nav-pills-border-radius:           $border-radius;
+$nav-pills-link-hover-color:        $primary;
+$nav-pills-link-active-color:       $primary;
+$nav-pills-active-border-color:     $gray-300;
+
+
+// Progress Bars
+$progress-xl-size: .8rem;
+$progress-lg-size: .6rem;
+$progress-sm-size: .2rem;
+
+
+// Alerts
+
+$alert-text-color: $white;
+$alert-padding-y: 1rem;
+$alert-padding-x: 1.5rem;
+$alert-border-radius: $border-radius;
+
+$alert-bg-level: -1;
+$alert-border-level: 1;
+$alert-color-level: 2;
+$alert-link-color:$white;
+
+
+
+// Close
+
+$close-font-size:                   $font-size-base * 1.5;
+$close-font-weight:                 $font-weight-bold;
+$close-bg:                          transparent;
+$close-hover-bg:                    transparent;
+$close-color:                       rgba(0, 0, 0, .6);
+$close-hover-color:                 rgba(0, 0, 0, .9);
+$close-text-shadow:                 none;
+
+
+// Badges
+
+$badge-font-size:                   .875rem;
+$badge-font-weight:                 $font-weight-normal;
+$badge-padding-y:                   .1rem;
+$badge-padding-x:                   .4rem;
+
+
+$badge-pill-padding-x:              .875em;
+$badge-pill-border-radius:          10rem;
+
+$badge-circle-size:                 2rem;
+
+
+// Cards
+
+$card-spacer-y:                     1.25rem;
+$card-spacer-x:                     1.5rem;
+$card-social-padding:               .25rem .375rem;
+$card-border-width:                 $border-width;
+$card-border-radius:                $border-radius;
+$card-border-color:                 rgba($gray-100, .05);
+$card-inner-border-radius:          calc(#{$card-border-radius} - #{$card-border-width});
+$card-cap-bg:                       $white;
+$card-bg:                           $white;
+$card-opacity:                      1;
+
+$card-img-overlay-padding:          1.25rem;
+$transition-bezier-card:            cubic-bezier(0.34, 1.45, 0.7, 1);
+
+//$card-group-margin:                 ($grid-gutter-width / 2);
+//$card-deck-margin:                  $card-group-margin;
+
+$card-columns-count:                3;
+$card-columns-gap:                  1.25rem;
+$card-columns-margin:               $card-spacer-y;
+
+
+// Tooltips
+$tooltip-font-size:                 $font-size-sm;
+$tooltip-color:                     $black;
+$tooltip-bg:                        $white;
+
+// Modals
+
+$modal-inner-padding:               1.5rem;
+
+$modal-lg:                          800px;
+$modal-md:                          500px;
+$modal-sm:                          380px;
+
+$modal-title-line-height:           1.1;
+
+//$modal-title-line-height:           $shape-height-base;
+
+$modal-content-bg:               $white;
+$modal-content-border-color:     rgba($black, .2);
+$modal-content-border-width:     1px;
+$modal-content-border-radius:   $border-radius-lg;
+
+$modal-backdrop-bg:           $black;
+$modal-backdrop-opacity:      .16;
+$modal-header-border-color:   $gray-200;
+$modal-footer-border-color:   $modal-header-border-color;
+$modal-header-border-width:   $modal-content-border-width;
+$modal-footer-border-width:   $modal-header-border-width;
+$modal-header-padding:        1.25rem;

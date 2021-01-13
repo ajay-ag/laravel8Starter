@@ -11,7 +11,7 @@ use Illuminate\Auth\Access\AuthorizationException;
 
 class VerificationController extends Controller
 {
-    /*
+  /*
     |--------------------------------------------------------------------------
     | Email Verification Controller
     |--------------------------------------------------------------------------
@@ -22,85 +22,85 @@ class VerificationController extends Controller
     |
     */
 
-    use VerifiesEmails;
+  use VerifiesEmails;
 
-    /**
-     * Where to redirect admins after verification.
-     *
-     * @var string
-     */
-    protected $redirectTo = '/admin';
+  /**
+   * Where to redirect admins after verification.
+   *
+   * @var string
+   */
+  protected $redirectTo = '/admin/dashboard';
 
-    /**
-     * Create a new controller instance.
-     *
-     * @return void
-     */
-    public function __construct()
-    {
-        $this->middleware('admin.auth');
-        $this->middleware('signed')->only('admin.verify');
-        $this->middleware('throttle:6,1')->only('admin.verify', 'resend');
+  /**
+   * Create a new controller instance.
+   *
+   * @return void
+   */
+  public function __construct()
+  {
+    $this->middleware('admin.auth');
+    $this->middleware('signed')->only('admin.verify');
+    $this->middleware('throttle:6,1')->only('admin.verify', 'resend');
+  }
+
+  /**
+   * Show the email verification notice.
+   *
+   * @param  \Illuminate\Http\Request  $request
+   *
+   * @return \Illuminate\Http\Response
+   */
+  public function show(Request $request)
+  {
+    return $request->user('admin')->hasVerifiedEmail()
+      ? redirect($this->redirectPath())
+      : view('admin.auth.verify');
+  }
+
+  /**
+   * Mark the authenticated user's email address as verified.
+   *
+   * @param  \Illuminate\Http\Request  $request
+   * @return \Illuminate\Http\Response
+   *
+   * @throws \Illuminate\Auth\Access\AuthorizationException
+   */
+  public function verify(Request $request)
+  {
+    if (!hash_equals((string) $request->route('id'), (string) $request->user('admin')->getKey())) {
+      throw new AuthorizationException;
     }
 
-    /**
-     * Show the email verification notice.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Request $request)
-    {
-        return $request->user('admin')->hasVerifiedEmail()
-            ? redirect($this->redirectPath())
-            : view('admin.auth.verify');
+    if (!hash_equals((string) $request->route('hash'), sha1($request->user('admin')->getEmailForVerification()))) {
+      throw new AuthorizationException;
     }
 
-    /**
-     * Mark the authenticated user's email address as verified.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     *
-     * @throws \Illuminate\Auth\Access\AuthorizationException
-     */
-    public function verify(Request $request)
-    {
-        if (! hash_equals((string) $request->route('id'), (string) $request->user('admin')->getKey())) {
-            throw new AuthorizationException;
-        }
-
-        if (! hash_equals((string) $request->route('hash'), sha1($request->user('admin')->getEmailForVerification()))) {
-            throw new AuthorizationException;
-        }
-
-        if ($request->user('admin')->hasVerifiedEmail()) {
-            return redirect($this->redirectPath());
-        }
-
-        if ($request->user('admin')->markEmailAsVerified()) {
-            event(new Verified($request->user('admin')));
-        }
-
-        return redirect($this->redirectPath())->with('verified', true);
+    if ($request->user('admin')->hasVerifiedEmail()) {
+      return redirect($this->redirectPath());
     }
 
-    /**
-     * Resend the email verification notification.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function resend(Request $request)
-    {
-        if ($request->user('admin')->hasVerifiedEmail()) {
-            return redirect($this->redirectPath());
-        }
-
-        $request->user('admin')->sendEmailVerificationNotification();
-
-        return back()->with('resent', true);
+    if ($request->user('admin')->markEmailAsVerified()) {
+      event(new Verified($request->user('admin')));
     }
+
+    return redirect($this->redirectPath())->with('verified', true);
+  }
+
+  /**
+   * Resend the email verification notification.
+   *
+   * @param  \Illuminate\Http\Request  $request
+   *
+   * @return \Illuminate\Http\Response
+   */
+  public function resend(Request $request)
+  {
+    if ($request->user('admin')->hasVerifiedEmail()) {
+      return redirect($this->redirectPath());
+    }
+
+    $request->user('admin')->sendEmailVerificationNotification();
+
+    return back()->with('resent', true);
+  }
 }

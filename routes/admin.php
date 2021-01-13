@@ -3,28 +3,60 @@
 use Illuminate\Support\Facades\Route;
 
 // Dashboard
-Route::get('/', 'HomeController@index')->name('home');
 
-// Login
-Route::get('login', 'Auth\LoginController@showLoginForm')->name('login');
-Route::post('login', 'Auth\LoginController@login');
-Route::post('logout', 'Auth\LoginController@logout')->name('logout');
+Route::group(['namespace' => 'Auth'], function () {
+  // Login
+  Route::get('login', 'LoginController@showLoginForm')->name('login');
+  Route::post('login', 'LoginController@login');
+  Route::get('logout', 'LoginController@logout')->name('logout');
+  // Register
+  Route::get('register', 'RegisterController@showRegistrationForm')->name('register');
+  Route::post('register', 'RegisterController@register');
+  // Reset Password
+  Route::get('password/reset', 'ForgotPasswordController@showLinkRequestForm')->name('password.request');
+  Route::post('password/email', 'ForgotPasswordController@sendResetLinkEmail')->name('password.email');
+  Route::get('password/reset/{token}', 'ResetPasswordController@showResetForm')->name('password.reset');
+  Route::post('password/reset', 'ResetPasswordController@reset')->name('password.update');
+  // Confirm Password
+  Route::get('password/confirm', 'ConfirmPasswordController@showConfirmForm')->name('password.confirm');
+  Route::post('password/confirm', 'ConfirmPasswordController@confirm');
+  // Verify Email
+  Route::get('email/verify', 'VerificationController@show')->name('verification.notice');
+  Route::get('email/verify/{id}/{hash}', 'VerificationController@verify')->name('verification.verify');
+  Route::post('email/resend', 'VerificationController@resend')->name('verification.resend');
+});
 
-// Register
-Route::get('register', 'Auth\RegisterController@showRegistrationForm')->name('register');
-Route::post('register', 'Auth\RegisterController@register');
+Route::group(['middleware' => ['admin.auth:admin', 'admin.verified']], function () {
 
-// Reset Password
-Route::get('password/reset', 'Auth\ForgotPasswordController@showLinkRequestForm')->name('password.request');
-Route::post('password/email', 'Auth\ForgotPasswordController@sendResetLinkEmail')->name('password.email');
-Route::get('password/reset/{token}', 'Auth\ResetPasswordController@showResetForm')->name('password.reset');
-Route::post('password/reset', 'Auth\ResetPasswordController@reset')->name('password.update');
+  Route::get('/dashboard', 'HomeController@index')->name('home');
 
-// Confirm Password
-Route::get('password/confirm', 'Auth\ConfirmPasswordController@showConfirmForm')->name('password.confirm');
-Route::post('password/confirm', 'Auth\ConfirmPasswordController@confirm');
+  Route::resource('profile', 'ProfileController');
+  Route::post('profile/update-image/{admin}', 'ProfileController@updateImage')->name('profile.update.image');
 
-// Verify Email
-// Route::get('email/verify', 'Auth\VerificationController@show')->name('verification.notice');
-// Route::get('email/verify/{id}/{hash}', 'Auth\VerificationController@verify')->name('verification.verify');
-// Route::post('email/resend', 'Auth\VerificationController@resend')->name('verification.resend');
+  Route::group(['namespace' => 'Access'], function () {
+    Route::post('user/list', 'UserController@dataList')->name('user.dataList');
+    Route::post('user/{id}/status', 'UserController@changeStatus')->name('user.status');
+    Route::get('user/email/unique', 'UserController@emailUnique')->name('user.email.unique');
+    Route::resource('user', 'UserController');
+
+    Route::get('get/role', 'RoleController@getRoleList')->name('get.role');
+    Route::post('assign/{role}/permission', 'RoleController@assignPermission')->name('role.permission.assign');
+    Route::post('role/exists', 'RoleController@roleExists')->name('role.exists');
+    Route::post('role/data-list', 'RoleController@dataList')->name('role.dataList');
+    Route::post('role/{id}/status', 'RoleController@changeStatus')->name('role.status');
+    Route::resource('role', 'RoleController');
+
+    Route::get('get/permission', 'PermissionController@getPermissionList')->name('get.permission');
+    Route::post('permission/exists', 'PermissionController@permissionExists')->name('permission.exists');
+    Route::post('permission/data-list', 'PermissionController@dataList')->name('permission.dataList');
+    Route::post('permission/{id}/status', 'PermissionController@changeStatus')->name('permission.status');
+    Route::resource('permission', 'PermissionController');
+  });
+
+  Route::group(['namespace' => 'Settings', 'middleware' => []], function () {
+
+    Route::get('website-setting', 'SettingController@showSettingPage')->name('website-setting');
+    Route::resource('settings', 'SettingController');
+    Route::resource('smtp', 'SmtpSettingController');
+  });
+});

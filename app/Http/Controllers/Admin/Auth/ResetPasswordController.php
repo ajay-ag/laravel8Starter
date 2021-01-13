@@ -10,7 +10,7 @@ use Illuminate\Support\Facades\Password;
 
 class ResetPasswordController extends Controller
 {
-    /*
+  /*
     |--------------------------------------------------------------------------
     | Password Reset Controller
     |--------------------------------------------------------------------------
@@ -21,59 +21,59 @@ class ResetPasswordController extends Controller
     |
     */
 
-    use ResetsPasswords;
+  use ResetsPasswords;
 
-    /**
-     * Where to redirect admins after resetting their password.
-     *
-     * @var string
-     */
-    protected $redirectTo = '/admin';
+  /**
+   * Where to redirect admins after resetting their password.
+   *
+   * @var string
+   */
+  protected $redirectTo = '/admin/dashboard';
 
-    /**
-     * Create a new controller instance.
-     *
-     * @return void
-     */
-    public function __construct()
-    {
-        $this->middleware('admin.guest:admin');
-    }
+  /**
+   * Create a new controller instance.
+   *
+   * @return void
+   */
+  public function __construct()
+  {
+    $this->middleware('admin.guest:admin');
+  }
 
-    /**
-     * Display the password reset view for the given token.
-     *
-     * If no token is present, display the link request form.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  string|null  $token
-     *
-     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
-     */
-    public function showResetForm(Request $request, $token = null)
-    {
-        return view('admin.auth.passwords.reset')->with(
-            ['token' => $token, 'email' => $request->email]
-        );
-    }
+  /**
+   * Display the password reset view for the given token.
+   *
+   * If no token is present, display the link request form.
+   *
+   * @param  \Illuminate\Http\Request  $request
+   * @param  string|null  $token
+   *
+   * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+   */
+  public function showResetForm(Request $request, $token = null)
+  {
+    return view('admin.auth.passwords.reset')->with(
+      ['token' => $token, 'email' => $request->email]
+    );
+  }
 
-    /**
-     * Get the broker to be used during password reset.
-     *
-     * @return \Illuminate\Contracts\Auth\PasswordBroker
-     */
-    public function broker()
-    {
-        return Password::broker('admins');
-    }
+  /**
+   * Get the broker to be used during password reset.
+   *
+   * @return \Illuminate\Contracts\Auth\PasswordBroker
+   */
+  public function broker()
+  {
+    return Password::broker('admins');
+  }
 
-    /**
-     * Get the guard to be used during password reset.
-     *
-     * @return \Illuminate\Contracts\Auth\StatefulGuard
-     */
-    protected function guard()
-    {
-        return Auth::guard('admin');
-    }
+  /**
+   * Get the guard to be used during password reset.
+   *
+   * @return \Illuminate\Contracts\Auth\StatefulGuard
+   */
+  protected function guard()
+  {
+    return Auth::guard('admin');
+  }
 }

@@ -20,6 +20,8 @@
         "sass-loader": "^8.0.0"
     },
     "dependencies": {
-        "admin-lte": "^3.0.5"
+        "admin-lte": "^3.0.5",
+        "alpinejs": "^2.8.0",
+        "block-ui": "^2.70.1"
     }
 }

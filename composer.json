@@ -9,15 +9,19 @@
   "license": "MIT",
   "require": {
     "php": "^7.3|^8.0",
+    "arcanedev/log-viewer": "^8.0",
     "bmatovu/multi-auth": "^10.4",
     "fideloper/proxy": "^4.4",
     "fruitcake/laravel-cors": "^2.0",
     "guzzlehttp/guzzle": "^7.0.1",
+    "intervention/image": "^2.5",
     "laravel/framework": "^8.12",
     "laravel/tinker": "^2.5",
-    "laravel/ui": "^3.2"
+    "laravel/ui": "^3.2",
+    "spatie/laravel-permission": "^3.18"
   },
   "require-dev": {
+    "barryvdh/laravel-debugbar": "^3.5",
     "facade/ignition": "^2.5",
     "fakerphp/faker": "^1.9.1",
     "laravel/sail": "^1.0.1",

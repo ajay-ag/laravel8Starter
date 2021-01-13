@@ -1,5 +1,6 @@
 {
     "/admin/js/app.js": "/admin/js/app.js",
+    "/admin/css/app.css": "/admin/css/app.css",
     "/admin/js/plugins/chart.js": "/admin/js/plugins/chart.js",
     "/resources/sass/admin/AdminLTE-components.scss": "/resources/sass/admin/AdminLTE-components.scss",
     "/resources/sass/admin/AdminLTE-core.scss": "/resources/sass/admin/AdminLTE-core.scss",
@@ -43,6 +44,5 @@
     "/resources/sass/admin/_variables.scss": "/resources/sass/admin/_variables.scss",
     "/admin/js/datatables.js": "/admin/js/datatables.js",
     "/admin/css/backend-plugins.css": "/admin/css/backend-plugins.css",
-    "/admin/js/backend-plugins.js": "/admin/js/backend-plugins.js",
-    "/admin/css/app.css": "/admin/css/app.css"
+    "/admin/js/backend-plugins.js": "/admin/js/backend-plugins.js"
 }

@@ -34,6 +34,22 @@
             </p>
           </a>
         </li>
+        <li class="nav-item ">
+          <a href="{{ route('admin.contact.index') }}" class="nav-link {{ Helper::isActive(['sub-category.*']) }}">
+            <i class="nav-icon align-middle fas fa fa-megaphone"></i>
+            <p>
+              Contact
+            </p>
+          </a>
+        </li>
+        <li class="nav-item ">
+          <a href="{{ route('admin.newsletter.index') }}" class="nav-link {{ Helper::isActive(['sub-category.*']) }}">
+            <i class="nav-icon align-middle fas fa fa-envelope"></i>
+            <p>
+              Newsletter
+            </p>
+          </a>
+        </li>
         <li class="nav-item has-treeview {{ Helper::isActive(['user.*', 'role.*', 'permission.*'], 'menu-open') }} ">
           <a href="pages/widgets.html" class="nav-link  {{ Helper::isActive(['user.*', 'role.*', 'permission.*']) }}">
             <i class="nav-icon align-middle  fa fa-user f-18  px-1"></i>

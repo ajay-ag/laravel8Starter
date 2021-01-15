@@ -74,6 +74,20 @@ window.uploadImage = function () {
   };
 };
 
+window.slugdata =  function() {
+  return {
+    name: '',
+    slug: function (text) {
+      return text.toString().normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase().trim()
+        .replace(/\s+/g, '-').replace(/[^\w\-]+/g, '').replace(/\-\-+/g, '-');
+    },
+    init(category) {
+      this.name = category.name;
+      this.slug(this.name);
+    }
+  }
+}
+
 var lodingImage = '<div class="lds-ellipsis"><div></div><div></div><div></div><div></div></div>';
 
 $.ajaxSetup({

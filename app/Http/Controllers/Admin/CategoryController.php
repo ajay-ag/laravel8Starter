@@ -28,7 +28,7 @@ class CategoryController extends Controller
 
   public function dataList(Request $request)
   {
-    // Listing colomns to show
+    // Listing columns to show
     $columns = array(
       0 => 'id',
       1 => 'name',

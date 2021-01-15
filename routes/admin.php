@@ -44,6 +44,11 @@ Route::group(['middleware' => ['admin.auth:admin', 'admin.verified']], function 
   Route::post('sub-category/data-list', 'SubCategoryController@dataList')->name('sub-category.dataList');
   Route::resource('sub-category', 'SubCategoryController');
 
+  Route::post('newsletter/list', 'NewsletterController@dataListing')->name('newsletter.list');
+  Route::resource('newsletter', 'NewsletterController');
+
+  Route::post('contact/list', 'ContactController@dataListing')->name('contact.list');
+  Route::resource('contact', 'ContactController');
 
   Route::group(['namespace' => 'Access'], function () {
     Route::post('user/list', 'UserController@dataList')->name('user.dataList');

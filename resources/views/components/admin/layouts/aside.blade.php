@@ -12,9 +12,25 @@
         data-accordion="false">
         <li class="nav-item ">
           <a href="{{ route('admin.home') }}" class="nav-link">
-            <i class="nav-icon align-middle  fas fa-th"></i>
+            <i class="nav-icon align-middle  fas fa-tachometer-alt"></i>
             <p>
               Dashboard
+            </p>
+          </a>
+        </li>
+        <li class="nav-item ">
+          <a href="{{ route('admin.category.index') }}" class="nav-link {{ Helper::isActive(['category.*']) }}">
+            <i class="nav-icon align-middle fas fa-clipboard-list"></i>
+            <p>
+              categories
+            </p>
+          </a>
+        </li>
+        <li class="nav-item ">
+          <a href="{{ route('admin.sub-category.index') }}" class="nav-link {{ Helper::isActive(['sub-category.*']) }}">
+            <i class="nav-icon align-middle fas fa-clipboard-list"></i>
+            <p>
+              Sub Categories
             </p>
           </a>
         </li>

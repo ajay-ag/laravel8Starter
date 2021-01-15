@@ -35,7 +35,7 @@
           </a>
         </li>
         <li class="nav-item ">
-          <a href="{{ route('admin.contact.index') }}" class="nav-link {{ Helper::isActive(['sub-category.*']) }}">
+          <a href="{{ route('admin.contact.index') }}" class="nav-link {{ Helper::isActive(['contact.*']) }}">
             <i class="nav-icon align-middle fas fa fa-megaphone"></i>
             <p>
               Contact
@@ -43,7 +43,7 @@
           </a>
         </li>
         <li class="nav-item ">
-          <a href="{{ route('admin.newsletter.index') }}" class="nav-link {{ Helper::isActive(['sub-category.*']) }}">
+          <a href="{{ route('admin.newsletter.index') }}" class="nav-link {{ Helper::isActive(['newsletter.*']) }}">
             <i class="nav-icon align-middle fas fa fa-envelope"></i>
             <p>
               Newsletter

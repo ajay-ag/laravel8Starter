@@ -33,6 +33,18 @@ Route::group(['middleware' => ['admin.auth:admin', 'admin.verified']], function 
   Route::resource('profile', 'ProfileController');
   Route::post('profile/update-image/{admin}', 'ProfileController@updateImage')->name('profile.update.image');
 
+  Route::get('category/exists', 'CategoryController@exists')->name('category.exists');
+  Route::post('category/{id}/status', 'CategoryController@changeStatus')->name('category.status');
+  Route::post('category/data-list', 'CategoryController@dataList')->name('category.dataList');
+  Route::get('get/category', 'CategoryController@categoryList')->name('get.category');
+  Route::resource('category', 'CategoryController');
+
+  Route::get('sub-category/exists', 'SubCategoryController@exists')->name('sub-category.exists');
+  Route::post('sub-category/{id}/status', 'SubCategoryController@changeStatus')->name('sub-category.status');
+  Route::post('sub-category/data-list', 'SubCategoryController@dataList')->name('sub-category.dataList');
+  Route::resource('sub-category', 'SubCategoryController');
+
+
   Route::group(['namespace' => 'Access'], function () {
     Route::post('user/list', 'UserController@dataList')->name('user.dataList');
     Route::post('user/{id}/status', 'UserController@changeStatus')->name('user.status');

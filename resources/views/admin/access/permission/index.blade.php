@@ -16,7 +16,6 @@
       <p class="text-muted">
         The permission manager allows you to set which permissions can access which documents and with what
         permissions (read, write, submit, etc.). assign a permission to role or directly to user.
-
       </p>
 
     </div>
@@ -30,9 +29,10 @@
               <tr>
                 <th style="width:1%">No</th>
                 <th style="width:25%" data-orderable="true">Title</th>
+                <th style="width:25%" data-orderable="true">Modular</th>
                 {{-- <th style="width:10%" data-orderable="false">Permission</th>
                 --}}
-                <th style="width:10%" data-orderable="false">Status</th>
+                {{-- <th style="width:10%" data-orderable="false">Status</th> --}}
                 <th style="width:3%" class="text-center" data-orderable="false" class="text-center">Action</th>
               </tr>
             </thead>
@@ -76,7 +76,7 @@
               "data": "name"
             },
             {
-              "data": "status"
+              "data": "parent"
             },
             {
               "data": "action"

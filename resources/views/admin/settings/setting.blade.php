@@ -173,8 +173,8 @@
 
             </div>
           </div>
-          <hr style="margin: 15px -20px">
-          <div class="row">
+          {{-- <hr style="margin: 15px -20px"> --}}
+          <div class="row d-none">
             <div class="col">
               <div class="form-group">
                 <label for="offertext">Offer Slide</label>

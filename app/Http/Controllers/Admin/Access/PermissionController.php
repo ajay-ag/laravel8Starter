@@ -6,7 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Traits\DatatableTrait;
 use Str;
 use Illuminate\Http\Request;
-use Spatie\Permission\Models\Permission;
+use App\Models\Permission;
 
 class PermissionController extends Controller
 {
@@ -33,7 +33,7 @@ class PermissionController extends Controller
     $columns = array(
       0 => 'id',
       1 => 'name',
-      3 => 'action',
+      2 => 'id',
     );
 
 
@@ -49,22 +49,23 @@ class PermissionController extends Controller
 
     // DB::enableQueryLog();
     // genrate a query
-    $customcollections = Permission::when($search, function ($query, $search) {
+    $customcollections = Permission::with('parent')->when($search, function ($query, $search) {
       return $query->where('name', 'LIKE', "%{$search}%");
     });
 
-    // dd($totalData);
+
 
     $totalFiltered = $customcollections->count();
 
     $customcollections = $customcollections->offset($start)->limit($limit)->orderBy($order, $dir)->get();
-
     $data = [];
     // dd($customcollections);
     foreach ($customcollections as $key => $item) {
 
       // dd(route('admin.brand.edit', $item->id));
       $row['id'] = $item->id;
+      $row['name'] = '<b>' . $item->name . '</b>';
+      $row['parent'] = '<b>' . optional($item->parent)->name ?? 'N/A' . '</b>';
       $row['name'] = '<b>' . $item->name . '</b>';
 
       $row['status'] = $this->status($item->is_active, $item->id, route('admin.permission.status', ['id' => $item->id]));
@@ -177,12 +178,13 @@ class PermissionController extends Controller
 
   public function permissionExists(Request $request)
   {
+    // dd($request->all());
     $id = $request->get('id');
-    $countRec = $countRec = Permission::when($id != null, function ($query) use ($request) {
-      return $query->where('id', '!=', $request->id);
-    })
-      ->where('slug', Str::slug($request->permissions_name))
-      ->count();
+    $countRec = $countRec = Permission::when($id != null && $request->parent_id != null, function ($query) use ($request) {
+      return $query->where('id', '!=', $request->id)->where('parent_id', $request->id);
+    })->when($request->parent_id, function ($q) use ($request) {
+      return $q->where('id', $request->id);
+    })->where('slug', Str::slug($request->permissions_name))->count();
 
     if ($countRec > 0) {
       return 'false';
@@ -201,7 +203,7 @@ class PermissionController extends Controller
       })
       ->when(!$search, function ($q) {
         return $q->limit(15);
-      })->whereNotNull('is_active')->get();
+      })->get();
 
     return response()->json($data->toArray());
   }

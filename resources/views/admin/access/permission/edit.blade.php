@@ -1,7 +1,7 @@
 <div class="modal fade" id="addcategory" role="dialog" aria-labelledby="addcategory" aria-hidden="true">
   <div class="modal-dialog" permission="document">
     <form name="savepermissionsForm" id="savepermissionsForm" method="post"
-      data-exists="{{ route('admin.permission.exists', ['id' => $permission->id ?? null]) }}"
+      data-exists="{{ route('admin.permission.exists', ['id' => $permission->id ?? null , 'parent_id' => $permission->parent_id ?? null ]) }}"
       action="{{ route('admin.permission.update', $permission->id) }}">
       @if (isset($permission))
         @method('PATCH')

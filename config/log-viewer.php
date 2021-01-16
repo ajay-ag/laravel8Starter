@@ -129,5 +129,5 @@ return [
     '^#\d+',
     '^Stack trace:',
   ],
-
+  'show' => false
 ];

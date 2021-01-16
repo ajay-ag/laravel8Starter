@@ -246,7 +246,7 @@
         </div>
       </div>
 
-      {!! $entries->appends(compact('query'))->render() !!}
+      {!! $entries->appends(compact('query'))->links("pagination::bootstrap-4")->render() !!}
     </div>
   </div>
   <x-slot name="javascript">

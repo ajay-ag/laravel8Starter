@@ -12,4 +12,9 @@ class Permission extends SpatiePermission
   {
     return $this->hasMany(Permission::class, 'parent_id', 'id');
   }
+
+  public function parent()
+  {
+    return $this->hasOne(Permission::class, 'id', 'parent_id');
+  }
 }

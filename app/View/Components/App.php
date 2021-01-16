@@ -2,6 +2,7 @@
 
 namespace App\View\Components;
 
+use App\Models\Setting;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\View\Component;
 
@@ -27,7 +28,11 @@ class App extends Component
   public function render()
   {
     $adminUser = Auth::guard('admin')->user();
+    $setting = Setting::where('name', 'general_settings')->first();
+    $general_settings = $setting->response;
     view()->share('adminUser', $adminUser);
+    view()->share('general_settings', $general_settings);
+    view()->share('setting', $setting);
     return view('components.admin.layouts.app');
   }
 }

@@ -20,7 +20,6 @@ class Setting extends Model
 
   public function getLogoAttribute()
   {
-
     $imageExist  =  \Storage::exists($this->response->logo);
     if ($imageExist && $this->response->logo != NULL && $this->response->logo != "") {
       return asset('storage/' . $this->response->logo);

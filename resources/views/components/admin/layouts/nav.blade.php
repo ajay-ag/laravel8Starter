@@ -2,7 +2,7 @@
   <!-- Left navbar links -->
   <ul class="navbar-nav">
     <li class="nav-item">
-      <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
+      <a class="nav-link p-1" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars" style="font-size: 30px;"></i></a>
     </li>
   </ul>
   <!-- Right navbar links -->
@@ -12,7 +12,7 @@
       <a class="nav-link py-0" data-toggle="dropdown" href="#" aria-expanded="false">
         <img src="{{ $adminUser->profile_src }}" style="width:35px;" class="user-image  img-circle elevation-2"
           alt="User Image">
-        <span class="d-none d-md-inline">Gift Master In</span>
+        <span class="d-none d-md-inline">{{ $adminUser->first_name ?? '' }}</span>
       </a>
       <div class="dropdown-menu dropdown-menu-right mt-2">
         <a href="{{ route('admin.profile.index') }}" class="dropdown-item text-gray">

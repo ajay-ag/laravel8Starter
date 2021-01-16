@@ -29,8 +29,12 @@
             <div class="form-group m-form__group">
               <label for="permissions_name" class="form-control-label">Permissions Name: <i
                   class="text-danger">*</i></label>
-              <input type="text" class="form-control" id="permissions_name" name="permissions_name"
-                value="{{ $permission->description ?? '' }}" data-msg-remote="Please enter unique permission"
+              <input type="text"
+                class="form-control"
+                id="permissions_name"
+                name="permissions_name"
+                value="{{ $permission->description ?? '' }}"
+                data-msg-remote="Please enter unique permission"
                 maxlength="190">
             </div>
           </div>
@@ -92,6 +96,11 @@
           remote: {
             url: $('#savepermissionsForm').data('exists'),
             type: "post",
+            data: {
+              parent_id: function (el) {
+                return $('#parent_id').val();
+              }
+            },
           }
         }
       },

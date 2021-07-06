@@ -1,0 +1,29 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+.header_menu {
+  width: 100%;
+  position: absolute;
+  background: #fff;
+  z-index: 9999;
+}
+#mainNav {
+  background-color: #fff;
+  transition: background-color 0.2s ease;
+  width: 100% !important;
+}
+.header_menu.navbar_fixed .main_menu {
+  position: fixed;
+  width: 100%;
+  top: -70px;
+  left: 0;
+  right: 0;
+  background-color: #fff;
+  transform: translateY(70px);
+  box-shadow: 0 3px 16px 0 rgb(0 0 0 / 10%);
+}
+section.main-section{
+  margin-top: 120px;
+}

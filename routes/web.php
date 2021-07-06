@@ -14,8 +14,13 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('jobpost.index');
 });
+
+Route::get('/','JobpostController@index');
+Route::get('/job-form','JobpostController@create')->name('form.create');
+Route::post('/job-form','JobpostController@store')->name('form.store');
+Route::get('/job/{jobid}','JobpostController@show')->name('form.show');
 
 Auth::routes();
 

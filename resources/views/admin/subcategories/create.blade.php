@@ -11,7 +11,7 @@
       <div class="cards">
         <div class="card-body p-0">
           <h4 class=""> Create Sub Category </h4>
-          <p class="text-muted">Hear you can create a category and ulode image </p>
+          <p class="text-muted">Hear you can create a category and uplod image </p>
         </div>
       </div>
     </div>

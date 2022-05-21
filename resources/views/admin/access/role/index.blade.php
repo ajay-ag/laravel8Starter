@@ -1,15 +1,15 @@
 <x-app :title="$title">
-
-
   <x-admin.UI.page-header title="Manage Role">
     <x-slot name="action">
       <x-button href="{{ route('admin.user.index') }}" class="btn-secondary" icon="fa fa-arrow-left" variant="link">
         Back
       </x-button>
+      @if(request()->user()->hasRole('Super Admin'))
       <x-button data-url="{{ route('admin.role.create') }}" data-target-modal="#addcategory"
         href="{{ route('admin.user.index') }}" class="btn-primary call-modal" icon="fa fa-plus" variant="link">
         Add
       </x-button>
+      @endif
     </x-slot>
   </x-admin.UI.page-header>
 

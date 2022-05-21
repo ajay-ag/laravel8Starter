@@ -10,8 +10,8 @@
     <div class="col-sm-12 col-md-5">
       <div class="cards">
         <div class="card-body p-0">
-          <h4 class=""> Create Sub Category </h4>
-          <p class="text-muted">Hear you can create a category and ulode image </p>
+          <h4 class=""> Edit Sub Category </h4>
+          <p class="text-muted">Hear you can Edit a category and Uplod image </p>
         </div>
       </div>
     </div>

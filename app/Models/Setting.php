@@ -24,7 +24,7 @@ class Setting extends Model
     if ($imageExist && $this->response->logo != NULL && $this->response->logo != "") {
       return asset('storage/' . $this->response->logo);
     }
-    return asset('storage/default/default.png');
+    return asset('storage/default/default.jpg');
   }
 
 
@@ -34,7 +34,7 @@ class Setting extends Model
     if ($imageExist && $this->response->favicon != NULL && $this->response->favicon != "") {
       return asset('storage/' . $this->response->favicon);
     }
-    return asset('storage/default/default.png');
+    return asset('storage/default/default.jpg');
   }
 
   public static function generalSettings()

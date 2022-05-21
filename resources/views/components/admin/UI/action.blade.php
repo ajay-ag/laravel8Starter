@@ -101,7 +101,8 @@
 
                                     ><i class="{{ $item->get('icon') }}"></i>&nbsp;&nbsp;{{$item->get('text')}}
                                 </a>
-                            @endif
+
+                        @endif
                         @endforeach
                 </div>
             @endif

@@ -1,10 +1,13 @@
 <x-app>
   <x-admin.UI.page-header :title="$title">
     <x-slot name="action">
+      @if(auth('admin')->check() && auth('admin')->user()->can('category-add'))
       <x-button href="{{ route('admin.category.create') }}" class="btn-secondary" icon="fa fa-plus" variant="link">
         Add Category
       </x-button>
+      @endif
     </x-slot>
+
   </x-admin.UI.page-header>
   <div class="row mt-3">
     <div class="col-lg-12">

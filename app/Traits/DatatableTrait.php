@@ -41,7 +41,6 @@ trait DatatableTrait
 
   public function action($data)
   {
-
     return view('components.admin.UI.action')->with('list_item', array_filter($data))->render();
   }
 

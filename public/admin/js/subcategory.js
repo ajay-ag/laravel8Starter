@@ -1,7 +1,6 @@
 $(document).ready(function () {
 
   const url = $('#name').attr('data-url');
-
   categorySelect2 = $('.category-select2');
   categorySelect2.select2({
     allowClear: true,
@@ -33,6 +32,7 @@ $(document).ready(function () {
     // minimumInputLength: 1,
   });
 
+  
   $('#categoriesForm').validate({
     debug: false,
     ignore: '.select2-search__field,:hidden:not("textarea,.files,select")',
@@ -42,8 +42,11 @@ $(document).ready(function () {
         remote: {
           url: url,
           data: {
-            id: function (el) {
-              return $('#name').attr('data-id');
+            // id: function (el) {
+            //   return $('#name').attr('data-id');
+            // },
+            name: function () {
+              return $('#name').val();
             },
             category_id: function () {
               return $('.category-select2').val();
@@ -51,6 +54,11 @@ $(document).ready(function () {
           }
         }
       }
+    },
+    messages: {
+      name: {
+            remote: "sub-Category already in use",
+        }
     },
     errorPlacement: function (error, element) {
       // $(element).addClass('is-invalid')

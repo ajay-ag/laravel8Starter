@@ -19,6 +19,13 @@ class RoleController extends Controller
    *
    * @return \Illuminate\Http\Response
    */
+  public function __construct(){
+    $this->middleware(['auth:admin','role:Super Admin'],['only' => ['index','dataList','show']]);
+    $this->middleware(['auth:admin','role:Super Admin'],['only' => ['create','store']]);
+    $this->middleware(['auth:admin','role:Super Admin'],['only' => ['edit','update']]);
+    $this->middleware(['auth:admin','role:Super Admin'],['only' => ['destroy']]);
+  }
+
   public function index()
   {
     $this->data['title'] = 'Role';
@@ -91,7 +98,7 @@ class RoleController extends Controller
           'target' => '#addcategory',
           'class' => 'call-modal',
           'icon' => 'fa fa-pen',
-          'permission' => true
+          'permission' =>  request()->user()->hasRole('Super Admin') ? true : false
         ]),
         collect([
           'text' => 'Delete',
@@ -99,7 +106,7 @@ class RoleController extends Controller
           'action' => route('admin.role.destroy', ['role' => $item->id]),
           'class' => 'delete-confirmation',
           'icon' => 'fa fa-trash',
-          'permission' => true
+          'permission' => request()->user()->hasRole('Super Admin') ? true : false
         ])
       ]);
 
@@ -141,7 +148,7 @@ class RoleController extends Controller
    */
   public function show(Request $request, Role $role)
   {
-    $role = $role->load('permissions');;
+    $role = $role->load('permissions');
     $this->role_permission = $role->permissions->pluck('id');
     $this->data['role'] = $role;
 
@@ -170,7 +177,6 @@ class RoleController extends Controller
     });
 
     $this->data['permissions'] = $permission->count() > 0 ? $permission->toArray() : [];
-
     return view('admin.access.role.assign_permission', $this->data);
   }
 

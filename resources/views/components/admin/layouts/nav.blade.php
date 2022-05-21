@@ -10,7 +10,7 @@
     <!-- Notifications Dropdown Menu -->
     <li class="nav-item dropdown ">
       <a class="nav-link py-0" data-toggle="dropdown" href="#" aria-expanded="false">
-        <img src="{{ $adminUser->profile_src }}" style="width:35px;" class="user-image  img-circle elevation-2"
+        <img src="{{ $adminUser->profile_src ?? '' }}" id="image" style="width:35px;" class="user-image  img-circle elevation-2"
           alt="User Image">
         <span class="d-none d-md-inline">{{ $adminUser->first_name ?? '' }}</span>
       </a>

@@ -14,8 +14,8 @@ class Category extends Model
   public function getImageSrcAttribute()
   {
     if ($this->image && Storage::exists($this->image)) {
-      return asset('storage/' . $this->image);
+      return asset('storage/'.$this->image);
     }
-    return asset('storage/category/default.png');
+    return asset('storage/category/default.jpg');
   }
 }

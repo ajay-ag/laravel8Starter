@@ -74,21 +74,29 @@ window.uploadImage = function () {
   };
 };
 
-window.slugdata =  function() {
+window.slugdata = function () {
   return {
-    name: '',
+    name: "",
     slug: function (text) {
-      return text.toString().normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase().trim()
-        .replace(/\s+/g, '-').replace(/[^\w\-]+/g, '').replace(/\-\-+/g, '-');
+      return text
+        .toString()
+        .normalize("NFD")
+        .replace(/[\u0300-\u036f]/g, "")
+        .toLowerCase()
+        .trim()
+        .replace(/\s+/g, "-")
+        .replace(/[^\w\-]+/g, "")
+        .replace(/\-\-+/g, "-");
     },
     init(category) {
       this.name = category.name;
       this.slug(this.name);
-    }
-  }
-}
+    },
+  };
+};
 
-var lodingImage = '<div class="lds-ellipsis"><div></div><div></div><div></div><div></div></div>';
+var lodingImage =
+  '<div class="lds-ellipsis"><div></div><div></div><div></div><div></div></div>';
 
 $.ajaxSetup({
   headers: {
@@ -201,7 +209,7 @@ $(document).ready(function () {
               toast.fire({
                 type: "success",
                 title: "Success",
-                icon: 'success',
+                icon: "success",
                 text: respons.message,
               });
             })
@@ -210,7 +218,7 @@ $(document).ready(function () {
               toast.fire({
                 type: "error",
                 title: "Error",
-                icon: 'error',
+                icon: "error",
                 text: data.message
                   ? data.message
                   : "something went wrong please try again !",
@@ -237,7 +245,7 @@ $(document).ready(function () {
         toast.fire({
           type: "success",
           title: "Success",
-          icon: 'success',
+          icon: "success",
           text: respons.message,
         });
       })
@@ -245,7 +253,7 @@ $(document).ready(function () {
         toast.fire({
           type: "error",
           title: "Error",
-          icon: 'error',
+          icon: "error",
           text: "something went wrong please try again !",
         });
       });
@@ -296,5 +304,4 @@ $(document).ready(function () {
       $("#load-modal").html(" ");
     }
   });
-
 });

@@ -10,6 +10,11 @@ use App\Traits\DatatableTrait;
 class ContactController extends Controller
 {
   use DatatableTrait;
+
+  public function __construct(){
+    $this->middleware(['auth:admin','permission:Contact'],['only' => ['index','dataListing','show']]);
+  }
+
   /**
    * Display a listing of the resource.
    *
@@ -66,21 +71,22 @@ class ContactController extends Controller
       $row['email'] = $item->email;
       $row['phone'] = $item->phone;
       $row['subject'] = $item->subject;
-
       $row['action'] = $this->action([
-        collect([
-          'text' => 'View',
-          'class' => 'call-modal',
-          'icon' => 'fa fa-eye',
-          'action' => route('admin.contact.show', $item->id),
-          'target' => '#contactview',
-          'permission' => true
-        ])
-        // 'delete' => collect([
-        //     'id' => $item->id,
-        //     'action' => route('admin.brand.destroy', $item->id),
-        // ])
-      ]);
+          collect([
+            'text' => 'View',
+            'class' => 'call-modal',
+            'icon' => 'fa fa-eye',
+            'action' => route('admin.contact.show', $item->id),
+            'target' => '#contactview',
+            'permission' => request()->user()->can('Contact') ? true:false
+          ])
+          // 'delete' => collect([
+          //     'id' => $item->id,
+          //     'action' => route('admin.brand.destroy', $item->id),
+          // ])
+        ]);
+
+
 
       $data[] = $row;
     }

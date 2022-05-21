@@ -22,15 +22,13 @@ class ProfileController extends Controller
   public function update(Request $request, Admin $profile)
   {
     $data = $request->all();
-
     if ($request->filled('new_password')) {
-
+      
       $validatedData = $request->validate([
         'old_password' => 'required',
         'new_password' => 'required',
         'confirm_password' => 'required|same:new_password'
       ]);
-
       //check old password is correct or not
       if (!Hash::check($request->old_password, $profile->password)) {
         $error = \Illuminate\Validation\ValidationException::withMessages([
@@ -49,14 +47,12 @@ class ProfileController extends Controller
       $profile->password = $data['new_password'];
     }
     $profile->save();
-
     return back()->with('success', 'Profile update successfully');
   }
 
   public function updateImage(Request $request, Admin $admin)
   {
     $status = 400;
-
     $oldImage = $admin->profile_image;
     $file_data = $request->input('image');
     $file_name = 'image_' . time() . '.png'; //generating unique file name
@@ -81,4 +77,20 @@ class ProfileController extends Controller
       'image_url' => $admin->profile_src,
     ], $status);
   }
+
+  public function emailUnique(Request $request)
+  {
+    $id = $request->id;
+    $email = $request->email;
+    $hasEmail = Admin::when($id, function ($q, $id) {
+      return $q->where('id', '!=', $id);
+    })->where('email', $email)->first();
+
+    if (!$hasEmail) {
+      return 'true';
+    }
+
+    return 'false';
+  }
+
 }

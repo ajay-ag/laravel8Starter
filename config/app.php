@@ -229,5 +229,4 @@ return [
     'Helper' => \App\Helpers\Helper::class,
     'FileUploader' => \App\Helpers\FileUploader::class,
   ],
-
 ];

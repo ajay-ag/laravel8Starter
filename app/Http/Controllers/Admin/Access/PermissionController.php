@@ -12,6 +12,13 @@ class PermissionController extends Controller
 {
   use DatatableTrait;
 
+  public function __construct(){
+    $this->middleware(['auth:admin','role:Super Admin'],['only' => ['index','dataList','show']]);
+    $this->middleware(['auth:admin','role:Super Admin'],['only' => ['create','store']]);
+    $this->middleware(['auth:admin','role:Super Admin'],['only' => ['edit','update']]);
+    $this->middleware(['auth:admin','role:Super Admin'],['only' => ['destroy']]);
+  }
+
   public function index()
   {
     $this->data['title'] = 'Permission';
@@ -80,7 +87,7 @@ class PermissionController extends Controller
           'target' => '#addcategory',
           'class' => 'call-modal',
           'icon' => 'fa fa-pen',
-          'permission' => true
+          'permission' => request()->user()->hasRole('Super Admin') ? true:false
         ]),
         collect([
           'text' => 'Delete',
@@ -88,7 +95,7 @@ class PermissionController extends Controller
           'action' => route('admin.permission.destroy', ['permission' => $item->id]),
           'class' => 'delete-confirmation',
           'icon' => 'fa fa-trash',
-          'permission' => true
+          'permission' => request()->user()->hasRole('Super Admin') ? true:false
 
         ])
       ]);

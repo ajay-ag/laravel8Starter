@@ -49,6 +49,8 @@
   <script src="{{ asset('admin/js/app.js') }}"></script>
   <script src="{{ asset('admin/js/backend-plugins.js') }}" ></script>
   <script src="{{ asset('admin/js/datatables.js') }}"></script>
+
+
   <!-- jQuery -->
   <script>
     const message = Swal.mixin({

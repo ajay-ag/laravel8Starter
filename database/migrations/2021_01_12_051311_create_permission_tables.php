@@ -22,21 +22,21 @@ class CreatePermissionTables extends Migration
 
     Schema::create($tableNames['permissions'], function (Blueprint $table) {
       $table->bigIncrements('id');
-      $table->bigInteger('parent_id');
+      $table->bigInteger('parent_id')->nullable();
       $table->string('name');
-      $table->string('slug');
-      $table->string('icon');
+      $table->string('slug')->nullable();
+      $table->string('icon')->nullable();
       $table->string('guard_name');
-      $table->timestamp('is_active');
+      $table->timestamp('is_active')->nullable();
       $table->timestamps();
     });
 
     Schema::create($tableNames['roles'], function (Blueprint $table) {
       $table->bigIncrements('id');
       $table->string('name');
-      $table->string('slug');
+      $table->string('slug')->nullable();
       $table->string('guard_name');
-      $table->timestamp('is_active');
+      $table->timestamp('is_active')->nullable();
       $table->timestamps();
     });
 

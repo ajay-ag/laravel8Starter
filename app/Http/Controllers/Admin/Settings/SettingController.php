@@ -9,7 +9,10 @@ use Illuminate\Http\Request;
 
 class SettingController extends Controller
 {
-  //
+
+  public function __construct(){
+    $this->middleware(['auth:admin','permission:Settings'],['only' => ['showSettingPage','index','store']]);
+  }
 
   public function showSettingPage()
   {
@@ -45,7 +48,6 @@ class SettingController extends Controller
       'name' => 'general_settings',
       'response' => $json
     ]);
-
 
     return back()->with('success', 'Setting updated successfully');
   }

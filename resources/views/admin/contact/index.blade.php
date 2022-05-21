@@ -24,7 +24,7 @@
     <link rel="stylesheet" href="{{ asset('assets/plugins/mohithg-switchery/dist/switchery.min.css') }}">
   </x-slot>
   <x-slot name="script">
-    <script src="{{ asset('assets/plugins/mohithg-switchery/dist/switchery.min.js') }}"></script>
+    <script src="{{asset('assets/plugins/mohithg-switchery/dist/switchery.min.js') }}"></script>
   </x-slot>
   <x-slot name="javascript">
     <script type="text/javascript">

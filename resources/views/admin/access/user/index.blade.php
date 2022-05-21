@@ -2,9 +2,11 @@
 
   <x-admin.UI.page-header :title="$title">
     <x-slot name="action">
+      @if(auth('admin')->check() && auth('admin')->user()->can('user-add'))
       <x-button href="{{ route('admin.user.create') }}" class="btn-primary" icon="fa fa-plus" variant="link">
         Add user
       </x-button>
+      @endif
     </x-slot>
   </x-admin.UI.page-header>
 

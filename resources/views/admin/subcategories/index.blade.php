@@ -1,8 +1,10 @@
 <x-app>
   <x-admin.UI.page-header :title="$title">
     <x-slot name="action">
+      @if(auth('admin')->check() && auth('admin')->user()->can('subcategory-add'))
       <x-button href="{{ route('admin.sub-category.create') }}" class="btn-secondary" icon="fa fa-plus" variant="link">
-        Add Category
+        Add Sub Category
+      @endif
       </x-button>
     </x-slot>
   </x-admin.UI.page-header>
@@ -15,6 +17,7 @@
             <tr>
               <th style="width:1%">No</th>
               <th style="width:25%" data-orderable="true">Title</th>
+              <th style="width:10%" data-orderable="true">Category</th>
               <th style="width:10%" data-orderable="false">Status</th>
               <th style="width:10%" class="text-center" data-orderable="false">Action</th>
             </tr>
@@ -33,13 +36,13 @@
           "stateSave": true,
           "lengthMenu": [10, 25, 50],
           "responsive": true,
+
           // "iDisplayLength": 2,
           "ajax": {
             "url": $('#categoryTable').attr('data-url'),
             "dataType": "json",
             "type": "POST",
           },
-
           "order": [
             [0, "desc"]
           ],
@@ -48,6 +51,9 @@
             },
             {
               "data": "name"
+            },
+            {
+              "data": "category"
             },
             {
               "data": "status"

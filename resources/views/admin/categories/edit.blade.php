@@ -10,19 +10,17 @@
     <div class="col-sm-12 col-md-5">
       <div class="cards">
         <div class="card-body p-0">
-          <h4 class=""> Create Category </h4>
-          <p class="text-muted">Hear you can create a category and ulode image </p>
+          <h4 class=""> Edit Category </h4>
+          <p class="text-muted">Hear you can Update a category and uplod image </p>
         </div>
       </div>
     </div>
-
     <div class="col-sm-12 col-md-7 ">
       <form action="{{ route('admin.category.update' , $category->id ) }}" id="categoriesForm" method="post"
         enctype="multipart/form-data">
         @csrf @method('PUT')
         <x-card>
           <div class="row" x-data="slugdata()" x-init="init({{ json_encode($category) }})">
-
             <div class="col-md-12">
               <div class="form-group">
                 <label>Category Name <span class="text-danger">*</span></label>
@@ -83,10 +81,23 @@
       }
 
       $(document).ready(function () {
-
         $('#categoriesForm').validate({
           debug: false,
           ignore: '.select2-search__field,:hidden:not("textarea,.files,select")',
+          rules: {
+              name: {
+                  required: true,
+                      remote: {
+                          url:  $('#name').attr('data-rule-remote'),
+                          type: "get"
+                      }
+              }
+          },
+          messages: {
+            name: {
+                  remote: "Category already in use",
+              }
+          },
           errorPlacement: function (error, element) {
             // $(element).addClass('is-invalid')
             error.appendTo(element.parent()).addClass('text-danger');

@@ -32,7 +32,6 @@ class SmtpSettingController extends Controller
       'name' => 'mail',
       'response' => $json
     ]);
-
     return back()->with('success', 'Smtp details updated successfully');
   }
 }

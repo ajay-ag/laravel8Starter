@@ -4,13 +4,22 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\SubCategory;
+use App\Models\Category;
 use App\Traits\DatatableTrait;
 use Illuminate\Http\Request;
 use FileUploader;
 
+
 class SubCategoryController extends Controller
 {
   use DatatableTrait;
+
+  public function __construct(){
+    $this->middleware(['auth:admin','permission:SubCategories|subcategory-add|subcategory-edit|subcategory-delete'],['only' => ['index','dataList']]);
+    $this->middleware(['auth:admin','permission:subcategory-add'],['only' => ['create','store']]);
+    $this->middleware(['auth:admin','permission:subcategory-edit'],['only' => ['edit','update']]);
+    $this->middleware(['auth:admin','permission:subcategory-delete'],['only' => ['destroy']]);
+  }
 
   public function index()
   {
@@ -45,23 +54,22 @@ class SubCategoryController extends Controller
     $dir = $request->input('order.0.dir');
     $search = $request->input('search.value');
 
+
     // dd($request);
 
     // DB::enableQueryLog();
     // generate a query
     $subCategoryCollection = SubCategory::with('category')->when($search, function ($query, $search) {
-      return $query->whereLike(['name', 'category.name'], $search)->orWhere('name', 'LIKE', "%{$search}%");
+      return $query->whereLike(['name', 'category.name'], $search);
     });
 
     // dd($totalData);
 
     $totalFiltered = $subCategoryCollection->count();
-
     $subCategoryCollection = $subCategoryCollection->offset($start)->limit($limit)->orderBy($order, $dir)->get();
     $data = [];
-    // dd($subCategoryCollection);
-    foreach ($subCategoryCollection as $key => $item) {
 
+    foreach ($subCategoryCollection as $key => $item) {
       // dd(route('admin.brand.edit', $item->id));
       $row['id'] = $item->id;
       $row['name'] = '<b>' . $item->name . '</b>';
@@ -74,7 +82,7 @@ class SubCategoryController extends Controller
           'id' => $item->id,
           'action' => route('admin.sub-category.edit', $item->id),
           'icon' => 'fa fa-pen',
-          'permission' => true
+          'permission' => request()->user()->can('subcategory-edit') ? true:false
         ]),
         collect([
           'text' => 'Delete',
@@ -82,7 +90,7 @@ class SubCategoryController extends Controller
           'action' => route('admin.sub-category.destroy', $item->id),
           'class' => 'delete-confirmation',
           'icon' => 'fa fa-trash',
-          'permission' => true
+          'permission' => request()->user()->can('subcategory-delete') ? true:false
 
         ])
       ]);
@@ -170,7 +178,6 @@ class SubCategoryController extends Controller
    */
   public function destroy(SubCategory $subCategory)
   {
-
     $subCategory->delete();
 
     return response()->json([
@@ -207,7 +214,6 @@ class SubCategoryController extends Controller
     })->when($id == null && $category_id != null, function ($query) use ($request, $category_id) { // create time
       return $query->where('category_id', $category_id);
     })->where('name', $request->name)->count();
-
     if ($count > 0) {
       return 'false';
     } else {

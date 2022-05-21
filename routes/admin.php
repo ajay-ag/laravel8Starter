@@ -31,6 +31,7 @@ Route::group(['middleware' => ['admin.auth:admin', 'admin.verified']], function 
   Route::get('/dashboard', 'HomeController@index')->name('home');
 
   Route::resource('profile', 'ProfileController');
+  Route::get('profile/email/unique', 'ProfileController@emailUnique')->name('user.email.unique');
   Route::post('profile/update-image/{admin}', 'ProfileController@updateImage')->name('profile.update.image');
 
   Route::get('category/exists', 'CategoryController@exists')->name('category.exists');

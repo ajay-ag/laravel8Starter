@@ -8,6 +8,9 @@ use Illuminate\Http\Request;
 
 class NewsLetterController extends Controller
 {
+  public function __construct(){
+    $this->middleware(['auth:admin','permission:Newsletter'],['only' => ['index','dataListing']]);
+  }
   /**
    * Display a listing of the resource.
    *

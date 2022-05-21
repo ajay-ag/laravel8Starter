@@ -8,14 +8,23 @@ use App\Http\Controllers\Controller;
 use App\Http\Resources\CategoryResource;
 use App\Traits\DatatableTrait;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class CategoryController extends Controller
 {
   use DatatableTrait;
+
+   public function __construct(){
+    $this->middleware(['auth:admin','permission:Categories|category-add|category-edit|category-delete'],['only' => ['index','dataList']]);
+    $this->middleware(['auth:admin','permission:category-add'],['only' => ['create','store']]);
+    $this->middleware(['auth:admin','permission:category-edit'],['only' => ['edit','update']]);
+    $this->middleware(['auth:admin','permission:category-delete'],['only' => ['destroy']]);
+  }
+
   public function index()
   {
-    $this->data['title'] = 'Category';
-    return $this->view('admin.categories.index');
+      $this->data['title'] = 'Category';
+      return $this->view('admin.categories.index');
   }
 
 
@@ -73,7 +82,7 @@ class CategoryController extends Controller
           'id' => $item->id,
           'action' => route('admin.category.edit', $item->id),
           'icon' => 'fa fa-pen',
-          'permission' => true
+          'permission' =>  request()->user()->can('category-edit') ? true:false
         ]),
         collect([
           'text' => 'Delete',
@@ -81,8 +90,7 @@ class CategoryController extends Controller
           'action' => route('admin.category.destroy', ['category' => $item->id]),
           'class' => 'delete-confirmation',
           'icon' => 'fa fa-trash',
-          'permission' => true
-
+          'permission' => request()->user()->can('category-delete') ? true:false
         ])
       ]);
 
@@ -98,7 +106,7 @@ class CategoryController extends Controller
 
     return response()->json($json_data);
   }
-
+  
 
   /**
    * Store a newly created resource in storage.
@@ -150,7 +158,6 @@ class CategoryController extends Controller
    */
   public function update(Request $request, Category $category)
   {
-
     $category->name = $request->name;
     $category->slug = $request->slug;
     $category->description = $request->description;
@@ -167,13 +174,18 @@ class CategoryController extends Controller
    */
   public function destroy(Category $category)
   {
-
-    $category->delete();
+    if(DB::table('sub_categories')->where('category_id', $category->id)->doesntExist()){
+      $category->delete();
+      return response()->json([
+        'success' => true,
+        'message' => 'Category Deleted SuccessFully'
+      ], 200);
+    }
 
     return response()->json([
       'success' => true,
-      'message' => 'Category Deleted SuccessFully'
-    ], 200);
+      'message' => 'Category Used In Sub Category'
+    ], 401);
   }
 
   public function changeStatus(Request $request, $id)
@@ -207,7 +219,6 @@ class CategoryController extends Controller
       return 'true';
     }
   }
-
 
   public function categoryList(Request $request)
   {

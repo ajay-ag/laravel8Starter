@@ -20,12 +20,14 @@ class Admin extends Authenticatable implements MustVerifyEmail
 
   public static $guard_name = "admin";
 
+
   /**
    * The attributes that aren't mass assignable.
    *
    * @var array
    */
   protected $guarded = [];
+
 
   /**
    * The attributes that should be hidden for arrays.
@@ -102,6 +104,6 @@ class Admin extends Authenticatable implements MustVerifyEmail
     if ($imageExist && $this->profile_image != NULL && $this->profile_image != "") {
       return asset('storage/' . $this->profile_image);
     }
-    return asset('storage/default/default.png');
+    return asset('storage/default/default.jpg');
   }
 }

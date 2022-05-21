@@ -14,18 +14,12 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('jobpost.index');
+    return view('welcome');
 });
 
-Route::get('/','JobpostController@index');
-Route::get('/job-form','JobpostController@create')->name('form.create');
-Route::post('/job-form','JobpostController@store')->name('form.store');
-Route::get('/job/{jobid}','JobpostController@show')->name('form.show');
-
 Auth::routes();
+
+
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
-Auth::routes();
-
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

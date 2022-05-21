@@ -11,7 +11,7 @@
       <div class="cards">
         <div class="card-body p-0">
           <h4 class=""> Create Category </h4>
-          <p class="text-muted">Hear you can create a category and ulode image </p>
+          <p class="text-muted">Hear you can create a category and uplod image </p>
         </div>
       </div>
     </div>
@@ -70,16 +70,28 @@
         }
       }
       $(document).ready(function () {
-
         $('#categoriesForm').validate({
           debug: false,
           ignore: '.select2-search__field,:hidden:not("textarea,.files,select,#images")',
+          rules: {
+              name: {
+                  required: true,
+                      remote: {
+                          url:  $('#name').attr('data-rule-remote'),
+                          type: "get"
+                      }
+              }
+          },
+          messages: {
+            name: {
+                  remote: "Category already in use",
+              }
+          },
           errorPlacement: function (error, element) {
             // $(element).addClass('is-invalid')
             error.appendTo(element.parent()).addClass('text-danger');
           }
         });
-
       });
     </script>
   </x-slot>

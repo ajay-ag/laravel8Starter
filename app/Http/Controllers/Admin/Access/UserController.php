@@ -18,6 +18,10 @@ class UserController extends Controller
   public function __construct(Request $request)
   {
     $this->request = $request;
+    $this->middleware(['auth:admin','permission:Users|user-add|user-edit|user-delete'],['only' => ['index','dataList']]);
+    $this->middleware(['auth:admin','permission:user-add'],['only' => ['create','store']]);
+    $this->middleware(['auth:admin','permission:user-edit'],['only' => ['edit','update']]);
+    $this->middleware(['auth:admin','permission:user-delete'],['only' => ['destroy']]);
   }
 
   public function index()
@@ -35,13 +39,11 @@ class UserController extends Controller
   public function store(Request $request)
   {
     $data = $request->all();
-
     $user = new Admin();
 
     //define user role and permission
     $this->syncUser($user, $data);
-
-    return back()->with('success', 'User created successfully');
+    return redirect()->route('admin.user.index')->with('success', 'User created successfully');
   }
 
   public function dataList(Request $request)
@@ -99,7 +101,7 @@ class UserController extends Controller
           'id' => $item->id,
           'action' => route('admin.user.edit', $item->id),
           'icon' => 'fa fa-pen',
-          'permission' => true
+          'permission' => request()->user()->can('user-edit') ? true:false,
         ]),
         collect([
           'text' => 'Delete',
@@ -107,7 +109,7 @@ class UserController extends Controller
           'action' => route('admin.user.destroy', ['user' => $item->id]),
           'class' => 'delete-confirmation',
           'icon' => 'fa fa-trash',
-          'permission' => true
+          'permission' => request()->user()->can('user-delete')? true:false
         ])
       ]);
 
@@ -127,7 +129,7 @@ class UserController extends Controller
   public function edit(Request $request, Admin $user)
   {
     $user->load('roles', 'permissions');
-    $this->data['title'] = "User eidt";
+    $this->data['title'] = "Edit User";
     $this->data['user'] = $user;
     return $this->view('admin.access.user.edit');
   }
@@ -156,12 +158,11 @@ class UserController extends Controller
     //define user role and permission
     $this->syncUser($user, $data);
 
-    return redirect()->route('admin.user.index')->with('success', 'User created successfully');
+    return redirect()->route('admin.user.index')->with('success', 'User Updated successfully');
   }
 
   private function syncUser($user, $data)
   {
-
     $user->first_name = $data['first_name'];
     $user->last_name = $data['last_name'];
     $user->email = $data['email'];

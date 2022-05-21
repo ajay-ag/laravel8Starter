@@ -47,7 +47,6 @@
     'heading' => 'Setting',
     'description' => 'Here you can define all the information about tour site '
     ])
-
     <div class="col-sm-12 col-md-8 mb-5">
       <form action="{{ route('admin.settings.store') }}" id="settingsForm" enctype="multipart/form-data" method="post">
         @csrf

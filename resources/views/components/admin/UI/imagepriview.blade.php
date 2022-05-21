@@ -1,5 +1,5 @@
 @php
-$image = $priview != "" ? $priview : asset('storage/default/default.png') ;
+$image = $priview != "" ? $priview : asset('storage/default/default.jpg');
 @endphp
 <div class="form-group" x-data="uploadImage()" x-init="init('{{ $image }}')">
   <label for="{{ $id ?? $name }}" class="text-left">{{ $label }} <span class="text-danger">*</span> </label>
